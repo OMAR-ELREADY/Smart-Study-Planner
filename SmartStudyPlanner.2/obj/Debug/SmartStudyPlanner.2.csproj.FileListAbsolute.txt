@@ -1,0 +1,13 @@
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\bin\Debug\SmartStudyPlanner.2.exe.config
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\bin\Debug\SmartStudyPlanner.2.exe
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\bin\Debug\SmartStudyPlanner.2.pdb
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner.2.csproj.AssemblyReference.cache
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner._2.AddSubjectForm.resources
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner._2.Form1.resources
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner._2.Properties.Resources.resources
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner.2.csproj.GenerateResource.cache
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner.2.csproj.CoreCompileInputs.cache
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner.2.exe
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner.2.pdb
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner._2.Table.resources
+C:\Users\Mahmo\source\repos\SmartStudyPlanner.2\SmartStudyPlanner.2\obj\Debug\SmartStudyPlanner._2.WeeklyScheduleForm.resources
