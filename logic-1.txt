@@ -1,0 +1,22 @@
+public class Subject
+{
+    public string Name { get; set; }
+    public int Hours { get; set; }
+    public int Difficulty { get; set; }
+    public bool IsCompleted { get; set; }
+
+    public Subject(string name, int hours, int difficulty)
+    {   Name = name;
+        Hours = hours;
+        Difficulty = difficulty;
+        IsCompleted = false;
+    }
+}
+public class Student
+{
+    public List<Subject> Subjects { get; set; }
+    public Student()
+    {
+        Subjects = new List<Subject>();
+    }
+}
