@@ -1,0 +1,14 @@
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.csproj.AssemblyReference.cache
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner._2.AddSubjectForm.resources
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner._2.Form1.resources
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner._2.ScheduleForm.resources
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner._2.ProgressForm.resources
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner._2.Properties.Resources.resources
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.csproj.GenerateResource.cache
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.csproj.CoreCompileInputs.cache
+E:\Smart-Study-Planner-Gui-4\bin\Debug\SmartStudyPlanner.2.exe.config
+E:\Smart-Study-Planner-Gui-4\bin\Debug\SmartStudyPlanner.2.exe
+E:\Smart-Study-Planner-Gui-4\bin\Debug\SmartStudyPlanner.2.pdb
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.exe
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.pdb
+E:\Smart-Study-Planner-Gui-4\obj\Debug\SmartStudyPlanner.2.exe.config
