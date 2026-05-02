@@ -60,9 +60,9 @@ namespace SmartStudyPlanner._2
                 lblName.Location = new Point(10, 8);
                 card.Controls.Add(lblName);
 
-                // Hours info
+                // Sessions info
                 Label lblHrs = new Label();
-                lblHrs.Text = $"{sub.StudiedHours} / {sub.Hours} hrs studied";
+                lblHrs.Text = $"{sub.CompletedSessions} / {sub.Hours} sessions completed";
                 lblHrs.Font = new Font("Segoe UI", 9F);
                 lblHrs.ForeColor = Color.DimGray;
                 lblHrs.AutoSize = true;
@@ -88,9 +88,9 @@ namespace SmartStudyPlanner._2
                 lblPct.Location = new Point(500, 56);
                 card.Controls.Add(lblPct);
 
-                // +1 hour button
+                // +1 session button
                 Button btnPlus = new Button();
-                btnPlus.Text = "+1 Hour";
+                btnPlus.Text = "+1 Session";
                 btnPlus.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
                 btnPlus.BackColor = Color.FromArgb(30, 100, 200);
                 btnPlus.ForeColor = Color.White;
@@ -106,10 +106,16 @@ namespace SmartStudyPlanner._2
             }
 
             // Update overall bar and label
-            int overallPct = totalHours == 0 ? 0 : (totalStudied * 100) / totalHours;
+            int totalSessions = 0, totalCompleted = 0;
+            foreach (Subject sub in Form1.allSubjects)
+            {
+                totalSessions += sub.Hours;
+                totalCompleted += sub.CompletedSessions;
+            }
+            int overallPct = totalSessions == 0 ? 0 : (totalCompleted * 100) / totalSessions;
             if (overallPct > 100) overallPct = 100;
             pbOverall.Value = overallPct;
-            lblOverall.Text = $"Overall Progress: {overallPct}%  ({totalStudied}/{totalHours} total hours)";
+            lblOverall.Text = $"Overall Progress: {overallPct}%  ({totalCompleted}/{totalSessions} sessions)";
         }
 
         private void BtnPlus_Click(object sender, EventArgs e)
@@ -121,23 +127,27 @@ namespace SmartStudyPlanner._2
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            sub.StudiedHours++;
+            sub.CompletedSessions++;
+            sub.StudiedHours += 2;  // Each session = 2 hours
             BuildProgressRows(); // refresh all cards
+            Form1.SaveSubjects(); // save to JSON
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show("Are you sure you want to reset all progress? This will set all studied hours to 0 for a new week.",
+            var confirm = MessageBox.Show("Are you sure you want to reset all progress? This will set all sessions to 0 for a new week.",
                 "Confirm Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirm == DialogResult.Yes)
             {
-                // Reset all subjects' studied hours to 0
+                // Reset all subjects' progress to 0
                 foreach (Subject sub in Form1.allSubjects)
                 {
                     sub.StudiedHours = 0;
+                    sub.CompletedSessions = 0;
                 }
                 BuildProgressRows(); // refresh the display
+                Form1.SaveSubjects(); // save to JSON
                 MessageBox.Show("Progress has been reset! You can start a new week.", "Reset Complete",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

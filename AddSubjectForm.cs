@@ -74,6 +74,9 @@ namespace SmartStudyPlanner._2
             // Redistribute schedule after adding new subject
             Form1.DistributeSubjects();
 
+            // Save to JSON file
+            Form1.SaveSubjects();
+
             MessageBox.Show($"Subject \"{newSub.Name}\" added successfully!", "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 

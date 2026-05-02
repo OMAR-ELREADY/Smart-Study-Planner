@@ -13,21 +13,20 @@ namespace SmartStudyPlanner._2
 
         private void ScheduleForm_Load(object sender, EventArgs e)
         {
-            // Initialize DataGridView columns
+            // Initialize DataGridView columns - Matrix layout: Days as rows, Sessions as columns
+            // Columns will be added dynamically in BuildScheduleRows
             dgvSchedule.Columns.Add("Day", "Day");
-            dgvSchedule.Columns.Add("Subject", "Subject");
-            dgvSchedule.Columns.Add("Difficulty", "Difficulty");
-            dgvSchedule.Columns.Add("Hours", "Hours");
-            dgvSchedule.Columns.Add("Progress", "Progress");
             BuildScheduleRows();
         }
 
-        // Rebuilds rows dynamically — one row per day of the week
+        // Rebuilds rows dynamically — one row per day, sessions as columns
         private void BuildScheduleRows()
         {
-            // Clear existing dynamic rows (keep header row at index 0)
+            // Clear existing rows and columns (except Day column)
             while (dgvSchedule.Rows.Count > 0)
                 dgvSchedule.Rows.Clear();
+            while (dgvSchedule.Columns.Count > 1)
+                dgvSchedule.Columns.RemoveAt(1);
 
             if (Form1.allSubjects.Count == 0)
             {
@@ -36,41 +35,41 @@ namespace SmartStudyPlanner._2
                 return;
             }
 
-            // Display the 7 days of the week with their subjects
-            int totalHours = 0;
-            foreach (StudyDay day in Form1.weekSchedule)
+            // Get max sessions from first day (all days should have same max)
+            int maxSessions = Form1.weekSchedule[0].MaxSessions;
+
+            // Add session columns dynamically
+            for (int i = 1; i <= maxSessions; i++)
             {
-                if (day.Subjects.Count == 0)
-                {
-                    // Show free day
-                    dgvSchedule.Rows.Add(day.DayName, "Free Day", "-", 0, "-");
-                }
-                else
-                {
-                    // Show each subject on this day
-                    foreach (Subject sub in day.Subjects)
-                    {
-                        string status = sub.IsCompleted ? "Done" : $"{sub.ProgressPercent}%";
-                        string diff = sub.Difficulty.ToString();
-                        dgvSchedule.Rows.Add(day.DayName, sub.Name, diff, sub.Hours, status);
-
-                        // Color the difficulty cell
-                        DataGridViewCell diffCell = dgvSchedule.Rows[dgvSchedule.Rows.Count - 1].Cells[2];
-                        diffCell.Style.ForeColor = diff == "Hard" ? Color.Crimson :
-                                                   diff == "Medium" ? Color.DarkOrange :
-                                                                      Color.SeaGreen;
-                        diffCell.Style.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-
-                        // Color completed rows
-                        if (sub.IsCompleted)
-                            dgvSchedule.Rows[dgvSchedule.Rows.Count - 1].DefaultCellStyle.BackColor = Color.FromArgb(220, 255, 220);
-
-                        totalHours += sub.Hours;
-                    }
-                }
+                dgvSchedule.Columns.Add($"Session{i}", $"Session {i} (2h)");
             }
 
-            lblStatus.Text = $"Total: {Form1.allSubjects.Count} subject(s)  |  {totalHours} total hours planned";
+            // Display the 7 days of the week with sessions in columns
+            int totalSessions = 0;
+            foreach (StudyDay day in Form1.weekSchedule)
+            {
+                // Create row for this day
+                string[] rowCells = new string[maxSessions + 1];
+                rowCells[0] = day.DayName;  // Day name
+
+                // Fill session columns
+                for (int i = 0; i < maxSessions; i++)
+                {
+                    if (i < day.Sessions.Count)
+                    {
+                        rowCells[i + 1] = day.Sessions[i].Name;  // Subject name
+                        totalSessions++;
+                    }
+                    else
+                    {
+                        rowCells[i + 1] = "Free";  // Empty session
+                    }
+                }
+
+                dgvSchedule.Rows.Add(rowCells);
+            }
+
+            lblStatus.Text = $"Total: {Form1.allSubjects.Count} subject(s)  |  {totalSessions} sessions scheduled  |  {maxSessions} sessions per day";
             lblStatus.ForeColor = Color.DimGray;
         }
 
@@ -101,6 +100,8 @@ namespace SmartStudyPlanner._2
                     Form1.allSubjects.Remove(toRemove);
                     // Redistribute schedule after deleting
                     Form1.DistributeSubjects();
+                    // Save to JSON file
+                    Form1.SaveSubjects();
                     BuildScheduleRows();
                 }
             }
@@ -109,6 +110,25 @@ namespace SmartStudyPlanner._2
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             BuildScheduleRows();
+        }
+
+        private void btnAddSession_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show("Are you sure you want to add more sessions?\n\nThis will add 1 session (2 hours) to EVERY day of the week.",
+                "Confirm Add Session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirm == DialogResult.Yes)
+            {
+                // Add one session to each day
+                foreach (StudyDay day in Form1.weekSchedule)
+                {
+                    day.AddSession();
+                }
+                BuildScheduleRows();
+                Form1.SaveSubjects();  // Save session limits
+                MessageBox.Show("Added 1 session (2 hours) to each day!", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

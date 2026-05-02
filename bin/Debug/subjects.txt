@@ -1,0 +1,5 @@
+hard,Hard,3,6,3
+medium,Medium,2,4,2
+easy,Easy,1,2,1
+math,Hard,4,8,4
+phy,Medium,3,6,3
