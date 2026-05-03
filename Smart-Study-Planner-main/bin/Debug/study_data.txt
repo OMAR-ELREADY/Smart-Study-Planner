@@ -1,0 +1,9 @@
+SUBJECTS
+SCHEDULE
+DAY|Sunday|0
+DAY|Monday|0
+DAY|Tuesday|0
+DAY|Wednesday|0
+DAY|Thursday|0
+DAY|Friday|0
+DAY|Saturday|0
